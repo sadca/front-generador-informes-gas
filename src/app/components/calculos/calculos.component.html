@@ -1,0 +1,64 @@
+<div #todo id="todo" class="mt-lg-5" style="width: 80%;margin-left: 10%;">
+    <a href="#" (click)="exportarPDF($event)" class="btn btn-sm btn-primary">Exportar PDF</a>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mt-5">{{formulario.propietario}}</h1>
+            <h3 class="text-center">Tarifa {{formulario.tarifa}}</h3>
+        </div>
+    </div>
+
+    <br><br>
+
+    <h3 class="text-center">POTENCIA</h3>
+
+    <hr class="bg-dark">
+    <div id="calculos" class="row text-center" *ngIf="datosFijos.length > 1">
+
+        <!-- <select #tipoGraf1 name="tipoGraf1" class="form-control mt-5">
+            <option *ngFor="let tipo of tiposChart" [value]="tipo.valor" [defaultSelected]="tipo.default">
+                {{tipo.nombre}}</option>
+        </select> -->
+
+        <div class="col-12 mt-5">
+            <app-grafico *ngIf="datosFijos.length > 1" [barChartType]="'bar'" [barChartData]="datosFijos"
+                [barChartLabels]="labelsFecha" [barChartOptions]="optGrafFijo">
+            </app-grafico>
+            <br>
+            <a href="#" (click)="exportarGrafico($event, 0)" class="btn btn-sm btn-primary">Exportar gráfico</a>
+        </div>
+
+        <div class="col-12 mt-5">
+            <app-grafico *ngIf="datosVariables.length > 1" [barChartType]="'bar'" [barChartData]="datosVariables"
+                [barChartLabels]="labelsFecha" [barChartOptions]="optGrafVariable">
+            </app-grafico>
+            <br>
+            <a href="#" (click)="exportarGrafico($event, 1)" class="btn btn-sm btn-primary">Exportar gráfico</a>
+        </div>
+
+        <div class="col-12 mt-5">
+            <app-grafico *ngIf="datosSuma.length > 1" [barChartType]="'bar'" [barChartData]="datosSuma"
+                [barChartLabels]="labelsFecha" [barChartOptions]="optGrafSuma">
+            </app-grafico>
+            <br>
+            <a href="#" (click)="exportarGrafico($event, 2)" class="btn btn-sm btn-primary">Exportar gráfico</a>
+        </div>
+
+        <div class="col-12 mt-5">
+            <app-grafico *ngIf="datosTotales.length > 1" [barChartType]="'bar'" [barChartData]="datosTotales"
+                [barChartLabels]="labelsTotal" [barChartOptions]="optGrafTotal">
+            </app-grafico>
+            <br>
+            <a href="#" (click)="exportarGrafico($event, 3)" class="btn btn-sm btn-primary">Exportar gráfico</a>
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <img #imagen id="imagen" src="assets/img/logo_nuevo.png">
+        </div>
+    </div>
+
+</div>

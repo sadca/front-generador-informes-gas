@@ -1,0 +1,223 @@
+<div class="container mt-5">
+    <form #form="ngForm" (ngSubmit)="calcular(form)">
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-8">
+                    <label for="propietario">Propietario</label>
+                    <input [(ngModel)]="propietario"
+                        [ngClass]="{'is-invalid': form.submitted && form.controls['propietario'] && form.controls['propietario'].errors}"
+                        required type="text" class="form-control" id="propietario" name="propietario"
+                        placeholder="Propietario">
+                </div>
+                <div class="col-4">
+                    <label for="tarifa">Tarifa</label>
+                    <select [(ngModel)]="tarifa"
+                        [ngClass]="{'is-invalid': form.submitted && form.controls['tarifa'].errors}" required
+                        name="tarifa" class="form-control">
+                        <option *ngFor="let tarifa of tarifas" [value]="tarifa.tarifa">{{tarifa.tarifa}}</option>
+                    </select>
+                    <div *ngIf="form.submitted && form.controls['tarifa'].errors" class="invalid-feedback">
+                        Este campo es obligatorio
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="text-center">Precio Tarifa Actual</h4>
+        <div class="card border-primary">
+
+            <div class="form-group card-body">
+                <div class="row">
+
+                    <div class="col-6">
+                        <label for="terFijoAct">Precio Término Fijo Actual</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="terFijoAct"
+                                [ngClass]="{'is-invalid': form.submitted && form.controls['terFijoAct'] && form.controls['terFijoAct'].errors}"
+                                number required type="number" class="form-control" id="terFijoAct" name="terFijoAct"
+                                placeholder="Precio Término Fijo Actual">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">€/día</div>
+                            </div>
+                            <div *ngIf="form.submitted && form.controls['terFijoAct'] && form.controls['terFijoAct'].errors"
+                                class="invalid-feedback">
+                                Este campo es obligatorio
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="terEnerAct">Precio Energía Actual</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="terEnerAct"
+                                [ngClass]="{'is-invalid': form.submitted && form.controls['terEnerAct'] && form.controls['terEnerAct'].errors}"
+                                number required type="number" class="form-control" id="terEnerAct" name="terEnerAct"
+                                placeholder="Precio Energía Actual">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">€/kWh</div>
+                            </div>
+                            <div *ngIf="form.submitted && form.controls['terEnerAct'] && form.controls['terEnerAct'].errors"
+                                class="invalid-feedback">
+                                Este campo es obligatorio
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <h4 class="text-center">Precio Tarifa Nuevo</h4>
+        <div class="card border-success">
+
+            <div class="form-group card-body">
+                <div class="row">
+
+                    <div class="col-6">
+                        <label for="terFijoNew">Precio Término Fijo Nuevo</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="terFijoNew"
+                                [ngClass]="{'is-invalid': form.submitted && form.controls['terFijoNew'] && form.controls['terFijoNew'].errors}"
+                                number required type="number" class="form-control" id="terFijoNew" name="terFijoNew"
+                                placeholder="Precio Término Fijo Nuevo">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">€/día</div>
+                            </div>
+                            <div *ngIf="form.submitted && form.controls['terFijoNew'] && form.controls['terFijoNew'].errors"
+                                class="invalid-feedback">
+                                Este campo es obligatorio
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="terEnerNew">Precio Energía Nuevo</label>
+                        <div class="input-group">
+                            <input [(ngModel)]="terEnerNew"
+                                [ngClass]="{'is-invalid': form.submitted && form.controls['terEnerNew'] && form.controls['terEnerNew'].errors}"
+                                number required type="number" class="form-control" id="terEnerNew" name="terEnerNew"
+                                placeholder="Precio Energía Nuevo">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">€/kWh</div>
+                            </div>
+                            <div *ngIf="form.submitted && form.controls['terEnerNew'] && form.controls['terEnerNew'].errors"
+                                class="invalid-feedback">
+                                Este campo es obligatorio
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <h4 class="text-center">Impuestos y Descuentos</h4>
+        <div class="card border-info">
+
+            <div class="form-group card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="impuesto">Impuesto Hidrocarburos</label>
+                        <div class="input-group">
+                            <input required [(ngModel)]="impuesto" number type="number" class="form-control"
+                                id="impuesto" name="impuesto" placeholder="Impuesto Hidrocarburos">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">€/kWh</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="descuento">Descuento</label>
+                        <div class="input-group">
+                            <input required [(ngModel)]="descuento" number type="number" class="form-control"
+                                id="descuento" name="descuento" placeholder="Descuento Potencia">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-light">
+                        <thead>
+                            <tr>
+                                <th>Nombre Archivo Adjunto</th>
+                                <th>
+                                    <button *ngIf="archivos.length > 0" (click)="eliminarArchivos()"
+                                        class="btn btn-danger btn-sm btn-block">Eliminar Todos</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let archivo of archivos">
+                                <td [ngClass]="{'text-green': archivo.progreso >= 100}">
+                                    {{ archivo.nombreArchivo }}</td>
+                                <td>
+                                    <button (click)="eliminarArchivo(archivo)"
+                                        class="btn btn-danger btn-sm btn-block">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <label>Adjuntar archivo</label>
+                    <div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento = $event"
+                        [ngClass]="{'file-over': estaSobreElemento}" class="well drop-zone">
+                        <label class="inputFile" for="cajaEjemplo">Arrastre sus archivos o pulse aquí para
+                            adjuntar archivos</label>
+                        <input class="inputFile" id="cajaEjemplo" type="file" (change)="cargarFichero($event)">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Calcular</button>
+
+    </form>
+
+    <br>
+    <h4 class="text-center">Consultas previas</h4>
+
+    <table class="table table-striped table-dark text-center">
+        <thead>
+            <tr>
+                <th scope="col">Propietario</th>
+                <th scope="col">Tarifa</th>
+                <th scope="col">CUPS</th>
+                <th scope="col">Fecha consulta</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let res of historico; let i = index">
+                <td>{{res.propietario}}</td>
+                <td>{{res.tarifa}}</td>
+                <td>{{res.cups}}</td>
+                <td>{{res.fecha_alta | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                <td><button (click)="cargar(i)" class="btn btn-success">Cargar</button></td>
+                <td><button (click)="borrarRegistro(res.fecha_alta)" class="btn btn-danger">Borrar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
